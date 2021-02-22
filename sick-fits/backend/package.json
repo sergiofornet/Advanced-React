@@ -12,6 +12,11 @@
 		"extends": "wesbos/typescript.js",
 		"rules": {
 			"@typescript-eslint/no-unsafe-assignment": 0,
+			"indent": "off",
+			"@typescript-eslint/indent": [
+				"error",
+				"tab"
+			],
 			"no-console": 0,
 			"prettier/prettier": [
 				"error",
