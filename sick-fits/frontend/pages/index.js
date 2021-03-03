@@ -1,10 +1,3 @@
-// import Page from '../components/Page';
-
-export default function IndexPage() {
-	return (
-		<>
-			<p>INDEX!</p>
-			<p>INDEX!</p>
-		</>
-	);
-}
+// import ProductsPage from './products';
+// export default ProductsPage;
+export { default } from './products';
