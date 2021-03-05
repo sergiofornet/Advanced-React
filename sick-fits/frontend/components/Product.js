@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ItemStyles from './styles/ItemStyles';
 import Title from './styles/Title';
-import PriceTag from './styles/Pricetag';
+import PriceTag from './styles/PriceTag';
 import formatMoney from '../lib/formatMoney';
 import DeleteProduct from './DeleteProduct';
 
