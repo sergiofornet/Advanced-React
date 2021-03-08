@@ -19,7 +19,7 @@ export default function Pagination({ page }) {
 	if (loading) return 'Loading...';
 	if (error) return <DisplayError error={error} />;
 	const { count } = data._allProductsMeta;
-	const pageCount = count / Math.ceil(perPage);
+	const pageCount = Math.ceil(count / perPage);
 	return (
 		<PaginationStyles>
 			<Head>
