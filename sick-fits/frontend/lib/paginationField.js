@@ -5,7 +5,6 @@ export default function paginationField() {
 		keyArgs: false, // tells Apollo we will take care of everything.
 		read(existing = [], { args, cache }) {
 			// args-> { $first, $skip }
-			console.log({ existing, args, cache });
 			const { skip, first } = args;
 
 			//  Read the number of items on the page from the cache.
