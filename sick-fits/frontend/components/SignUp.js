@@ -71,13 +71,13 @@ export default function SignUp() {
 						onChange={handleChange}
 					/>
 				</label>
-				<label htmlFor="email">
+				<label htmlFor="password">
 					Password
 					<input
 						type="password"
 						name="password"
 						id="password"
-						placeholder="Your pa ssword"
+						placeholder="Your password"
 						autoComplete="password"
 						value={inputs.password}
 						onChange={handleChange}
