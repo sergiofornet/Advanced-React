@@ -9,6 +9,7 @@ import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import 'dotenv/config';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
 	process.env.DATABASE_URL ||
@@ -32,7 +33,8 @@ const { withAuth } = createAuth({
 		// 	console.log(args);
 		// },
 		sendToken: async (args) => {
-			console.log(args);
+			// console.log(args);
+			await sendPasswordResetEmail(args.token, args.identity);
 		},
 	},
 });
