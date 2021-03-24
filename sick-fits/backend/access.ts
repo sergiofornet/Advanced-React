@@ -59,13 +59,24 @@ export const rules = {
 		return { order: { user: { id: session.itemId } } };
 	},
 	canReadProducts({ session }: ListAccessArgs) {
-		if (!isSignedIn({ session })) {
-			return false;
-		}
+		// if (!isSignedIn({ session })) {
+		// 	return false;
+		// }
 		if (permissions.canManageProducts({ session })) {
 			return true; // They can read everything!
 		}
 		// They should only see available products (based on the status field)
 		return { status: 'available' };
+	},
+	canManageUsers({ session }: ListAccessArgs) {
+		if (!isSignedIn({ session })) {
+			return false;
+		}
+		// 1. Do they have the permission of canManageProducts.
+		if (permissions.canManageUsers({ session })) {
+			return true;
+		}
+		// Otherwise they may only update themselves
+		return { id: session.itemId };
 	},
 };
