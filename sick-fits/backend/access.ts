@@ -30,11 +30,10 @@ export const rules = {
 		if (permissions.canManageProducts({ session })) {
 			return true;
 		}
-		// 2. If not, o they own this item.
+		// 2. If not, do they own this item?
 		return { user: { id: session.itemId } };
 	},
 	canReadProducts({ session }: ListAccessArgs) {
-		console.log(permissions.canManageProducts({ session }));
 		if (permissions.canManageProducts({ session })) {
 			return true; // They can read everything!
 		}
