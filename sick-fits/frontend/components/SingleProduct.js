@@ -37,12 +37,34 @@ const SINGLE_ITEM_QUERY = gql`
 	}
 `;
 
-export default function SingleProduct({ id }) {
+const ID_BY_NAME = gql`
+	query ID_BY_NAME($slug: String!) {
+		allProducts(where: { slug_i: $slug }) {
+			name
+			id
+		}
+	}
+`;
+
+export default function SingleProduct({ slug }) {
+	const { data: idData, loading: idLoading, error: idError } = useQuery(
+		ID_BY_NAME,
+		{
+			variables: { slug },
+			fetchPolicy: 'no-cache',
+		}
+	);
+	const productId = idData?.allProducts[0]?.id;
+	console.log(productId);
 	const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
-		variables: { id },
+		skip: !productId,
+		variables: { id: productId },
 	});
+	console.log({ idData, idLoading, idError });
 	if (loading) return <p>Loading...</p>;
 	if (error) return <DisplayError error={error} />;
+	if (idLoading) return <p>Loading...</p>;
+	if (idError) return <DisplayError error={idError} />;
 	const { Product: product } = data;
 	return (
 		<ProductStyles>

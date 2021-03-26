@@ -9,8 +9,41 @@ export const Product = list({
 		update: rules.canManageProducts,
 		delete: rules.canManageProducts,
 	},
+	hooks: {
+		resolveInput: async ({ operation, originalInput, resolvedData }) => {
+			if (operation === 'create') {
+				const originalName: string = await originalInput.name;
+				const resolvedSlug: string = originalName
+					.replace(/(<([^>]+)>)/gi, '')
+					.trim()
+					.replace(' ', '-')
+					.toLowerCase();
+				resolvedData.slug = resolvedSlug;
+			}
+			if (operation === 'update' && originalInput.slug) {
+				const originalSlug: string = await originalInput.slug;
+				const resolvedSlug = originalSlug
+					.replace(/(<([^>]+)>)/gi, '')
+					.trim()
+					.replace(' ', '-')
+					.toLowerCase();
+				resolvedData.slug = resolvedSlug;
+			}
+			return resolvedData;
+		},
+	},
 	fields: {
-		name: text({ isRequired: true }),
+		name: text({
+			isRequired: true,
+			isUnique: true,
+		}),
+		slug: text({
+			ui: {
+				displayMode: 'input',
+				itemView: { fieldmode: 'read' },
+				createView: { fieldMode: 'hidden' },
+			},
+		}),
 		description: text({
 			ui: {
 				displayMode: 'textarea',
