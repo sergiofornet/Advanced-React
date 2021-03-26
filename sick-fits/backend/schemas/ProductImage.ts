@@ -1,4 +1,4 @@
-import { relationship, text } from '@keystone-next/fields';
+import { relationship, text, virtual } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
 import 'dotenv/config';
@@ -25,10 +25,17 @@ export const ProductImage = list({
 		}),
 		altText: text(),
 		product: relationship({ ref: 'Product.photo' }),
+		filename: virtual({
+			graphQLReturnType: 'String',
+			resolver(item) {
+				return `${item.image.filename}`;
+			},
+		}),
 	},
 	ui: {
 		listView: {
 			initialColumns: ['image', 'altText', 'product'],
 		},
+		labelField: 'filename',
 	},
 });
