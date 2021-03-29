@@ -30,8 +30,8 @@ function CartItem({ cartItem }) {
 		<CartItemStyles>
 			<img
 				width="100"
-				src={product.photo.image.publicUrlTransformed}
-				alt={product.photo.altText}
+				src={product?.photo?.image.publicUrlTransformed}
+				alt={product?.photo?.altText}
 			/>
 			<div>
 				<h3>{product.name}</h3>
